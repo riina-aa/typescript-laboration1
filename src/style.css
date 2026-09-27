@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; 
+}
+
+body {
+  background-color: rgb(182, 182, 182);
+}
+
+header {
+  padding: 2rem; 
+  text-align: center;
+  background-color: rgb(212, 212, 212);
+  box-shadow: 1px 1px 8px grey;
+}
+
+header h1 {
+  margin-bottom: 0.5rem;
+}
+
+section {
+  padding: 4rem;
+  text-align: center;
+}
+
+section h2 {
+  margin-bottom: 5rem;
+}
+
+.courses {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%; 
+  margin: 0 auto;
+}
+
+.add-course {
+  background-color: rgb(212, 212, 212);
+  padding: 2rem;
+  text-align: start;
+}
+
+.add-course p {
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.inputs label {
+  text-align: start;
+}
+
+.inputs input {
+  width: 100%; 
+  padding: 0.5rem;
+}
+
+.inputs select {
+  width: 100%; 
+  padding: 0.5rem;
+}
+
+.buttonstyle {
+  margin-top: 0.5rem;
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 0.7rem 0.9rem; 
+  border-radius: 20px;
+}
+
+.buttonstyle:hover {
+  background-color: rgb(39, 39, 39);
+  cursor: pointer;
+}
+
+
+
+

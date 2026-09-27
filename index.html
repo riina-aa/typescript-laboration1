@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/style.css">
   <title>laboration1</title>
 </head>
 
@@ -17,8 +18,34 @@
     <section>
       <h2>Visa och lägga till kurser</h2>
       <div class="courses">
+        <div class="add-course">
+          <h3>Lägg till ny kurs</h3>
+          <p>Fyll i fälten för att lägga till nya kurser i listan</p>
+          <form>
+            <div class="inputs">
+              <label for="cCode">Kurskod:</label>
+              <input type="text" name="courseCode" id="cCode">
+            </div>
+            <div class="inputs">
+              <label for="cName">Kursnamn:</label>
+              <input type="text" name="courseName" id="cName">
+            </div>
+            <div class="inputs">
+              <label for="cProg">Progression:</label>
+              <select name="" name="courseProgression" id="cProg">
+                <option value="a">A</option>
+                <option value="b">B</option>
+              </select>
+            </div>
+            <div class="inputs">
+              <label for="cSyllabus">Syllabus (URL)</label>
+              <input type="text" name="courseSyllabus" id="cSyllabus">
+            </div>
+            <button class="buttonstyle" type="submit">Lägg till kurs</button>
+          </form>
+        </div>
         <div class="course-list"></div>
-        <div class="add-course"></div>
+
       </div>
     </section>
   </main>
