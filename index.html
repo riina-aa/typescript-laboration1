@@ -6,6 +6,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./src/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
   <title>laboration1</title>
 </head>
 
@@ -21,7 +22,7 @@
         <div class="add-course">
           <h3>Lägg till ny kurs</h3>
           <p>Fyll i fälten för att lägga till nya kurser i listan</p>
-          <form>
+          <form id="form">
             <div class="inputs">
               <label for="cCode">Kurskod:</label>
               <input type="text" name="courseCode" id="cCode">
@@ -41,10 +42,13 @@
               <label for="cSyllabus">Syllabus (URL)</label>
               <input type="text" name="courseSyllabus" id="cSyllabus">
             </div>
-            <button class="buttonstyle" type="submit">Lägg till kurs</button>
+            <button id="submit-btn" class="buttonstyle" type="submit">Lägg till kurs</button>
           </form>
         </div>
-        <div class="course-list"></div>
+        <div id="courses">
+          <h3>Tillagda kurser:</h3>
+          <div id="course-list"></div>
+        </div>
 
       </div>
     </section>
