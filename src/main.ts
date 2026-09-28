@@ -5,15 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let courses: CourseInfo[] = [];
 
-function init() {
+function init(): void {
 
   getCourses();
+  renderCourses();
 
-  const form = document.querySelector<HTMLButtonElement>("#form");
+  const form = document.querySelector<HTMLFormElement>("#form");
 
   if (form !== null) {
     form.addEventListener("submit", (event: SubmitEvent) => {
       getFormData(event);
+      form.reset();
     })
   }
 }
@@ -43,6 +45,7 @@ function getFormData(event: SubmitEvent): void {
 
   addCourse(cCode.value, cName.value, cProg.value, cSyllabus.value);
 
+
 }
 
 interface CourseInfo {
@@ -67,10 +70,17 @@ function addCourse(code: string, name: string, progression: string, syllabus: st
     syllabus: syllabus
   }
 
-  courses.push(course);
-  saveCourses();
-  renderCourses();
+  const checkedCode = courses.some(checkCode);
 
+  function checkCode(courseFromArray: CourseInfo): boolean {
+    return courseFromArray.code === code;
+  }
+
+  if (checkedCode === false) {
+      courses.push(course);
+      saveCourses();
+      renderCourses();
+    }
 };
 
 function saveCourses(): void {
@@ -85,11 +95,11 @@ function renderCourses(): void {
 
   if (list !== null) {
 
-    list.innerHTML += "";
+    list.innerHTML = "";
 
     courses.forEach(course => {
 
-      list.innerHTML = `
+      list.innerHTML += `
         <div class="course">
           <div class="course-header">
             <h4>${course.name}</h4>
@@ -98,14 +108,14 @@ function renderCourses(): void {
           </div>
           <div>
             <p class="syllabus">${course.syllabus}</p>
-            <button class="delete-btn"><span class="material-symbols-outlined" data-code="${course.code}">delete</span></button>
+            <button class="delete-btn" data-code="${course.code}"><span class="material-symbols-outlined">delete</span></button>
           </div>
         </div>
       `
     })
   }
-  
-  addDeleteListeners(); 
+
+  addDeleteListeners();
 
 };
 
@@ -127,8 +137,8 @@ function addDeleteListeners(): void {
 
 function deleteCourses(code: string): void {
 
-    courses = courses.filter((course: CourseInfo) => course.code !== code);
+  courses = courses.filter((course: CourseInfo) => course.code !== code);
 
-    saveCourses();
-    renderCourses();
+  saveCourses();
+  renderCourses();
 };
