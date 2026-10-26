@@ -100,17 +100,25 @@ function renderCourses(): void {
     courses.forEach(course => {
 
       list.innerHTML += `
-        <div class="course">
-          <div class="course-header">
-            <h4>${course.name}</h4>
-            <p>${course.code}</p>
-            <p>${course.progression}</p>
-          </div>
-          <div>
-            <p class="syllabus">${course.syllabus}</p>
-            <button class="delete-btn" data-code="${course.code}"><span class="material-symbols-outlined">delete</span></button>
-          </div>
-        </div>
+        <table>
+          <tbody id="course-header">
+            <tr class="course-info">
+              <td>${course.code}</td>
+              <td>${course.name}</td>
+              <td>${course.progression}</td>
+            </tr>
+            <tr class="course-actions">
+              <td colspan="2">
+                <a href="${course.syllabus}" target="_blank">Länk till kursplan</a>
+              </td>
+              <td>
+                <button class="delete-btn" data-code="${course.code}">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       `
     })
   }

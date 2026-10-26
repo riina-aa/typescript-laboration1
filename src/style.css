@@ -82,6 +82,85 @@ section h2 {
   cursor: pointer;
 }
 
+#courses {
+  background-color: rgb(212, 212, 212);
+  padding: 2rem;
+  text-align: start;
+  width: 60%;
+}
+
+#courses h3 {
+  margin-bottom: 2.5rem;
+}
+
+#course-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.course-info td:nth-child(1) {
+    width: 25%;
+}
+
+.course-info td:nth-child(2) {
+    width: 65%;
+}
+
+.course-info td:nth-child(3) {
+    width: 10%;
+}
+
+#course-list table td {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+.delete-btn {
+  border: none; 
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.delete-btn span {
+  background-color: none;
+  justify-self: center;
+}
+
+.delete-btn:hover {
+  color: red;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .courses {
+    width: 100%;
+  }
+
+  #courses {
+    width: 55%;
+  }
+}
+
+@media (max-width: 600px) {
+  .courses {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  #courses {
+    width: 100%;
+
+  }
+}
+
+
+
+
+
+
+
 
 
 
