@@ -12,11 +12,8 @@ function init(): void {
 
   const form = document.querySelector<HTMLFormElement>("#form");
 
-  if (form !== null) {
-    form.addEventListener("submit", (event: SubmitEvent) => {
-      getFormData(event);
-      form.reset();
-    })
+  if (form) {
+    form.addEventListener("submit", getFormData)
   }
 }
 
@@ -38,13 +35,35 @@ function getFormData(event: SubmitEvent): void {
   const cName = document.querySelector<HTMLInputElement>("#cName");
   const cProg = document.querySelector<HTMLInputElement>("#cProg");
   const cSyllabus = document.querySelector<HTMLInputElement>("#cSyllabus");
+  const errorContainer = document.querySelector<HTMLDivElement>(".error"); 
 
+  //Kontrollerar att alla input-fält finns och inte returnerar null 
   if (!cCode || !cName || !cProg || !cSyllabus) {
     return;
   }
 
-  addCourse(cCode.value, cName.value, cProg.value, cSyllabus.value);
+  if (errorContainer) {
+    errorContainer.textContent = ""; 
+  }
 
+  //Hämtar värden
+  const code = cCode.value.trim();
+  const name = cName.value.trim(); 
+  const progression = cProg.value.trim();
+  const syllabus = cSyllabus.value.trim(); 
+
+  //Kontrollerar tomma fält 
+  if (!code || !name || !progression || !syllabus) {
+    if (errorContainer) {
+      errorContainer.textContent = "Du måste fylla i alla fält"; 
+    }
+    return;
+  }
+
+  addCourse(code, name, progression, syllabus);
+
+  const form = document.querySelector<HTMLFormElement>("#form");
+  if (form) { form.reset()}; 
 
 }
 
@@ -54,8 +73,6 @@ interface CourseInfo {
   progression: "A" | "B" | "C";
   syllabus: string;
 }
-
-
 
 function addCourse(code: string, name: string, progression: string, syllabus: string): void {
 
@@ -86,8 +103,6 @@ function addCourse(code: string, name: string, progression: string, syllabus: st
 function saveCourses(): void {
   localStorage.setItem("courses", JSON.stringify(courses));
 }
-
-
 
 function renderCourses(): void {
 
