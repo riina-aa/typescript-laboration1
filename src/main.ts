@@ -35,7 +35,7 @@ function getFormData(event: SubmitEvent): void {
   const cName = document.querySelector<HTMLInputElement>("#cName");
   const cProg = document.querySelector<HTMLInputElement>("#cProg");
   const cSyllabus = document.querySelector<HTMLInputElement>("#cSyllabus");
-  const errorContainer = document.querySelector<HTMLDivElement>(".error"); 
+  const errorContainer = document.querySelector<HTMLDivElement>(".error");
 
   //Kontrollerar att alla input-fält finns och inte returnerar null 
   if (!cCode || !cName || !cProg || !cSyllabus) {
@@ -43,19 +43,37 @@ function getFormData(event: SubmitEvent): void {
   }
 
   if (errorContainer) {
-    errorContainer.textContent = ""; 
+    errorContainer.textContent = "";
   }
 
   //Hämtar värden
   const code = cCode.value.trim();
-  const name = cName.value.trim(); 
+  const name = cName.value.trim();
   const progression = cProg.value.trim();
-  const syllabus = cSyllabus.value.trim(); 
+  const syllabus = cSyllabus.value.trim();
 
   //Kontrollerar tomma fält 
   if (!code || !name || !progression || !syllabus) {
     if (errorContainer) {
-      errorContainer.textContent = "Du måste fylla i alla fält"; 
+      errorContainer.textContent = "Du måste fylla i alla fält.";
+    }
+    return;
+  }
+
+  //Kontrollerar 
+  if (progression !== "A" && progression !== "B" && progression !== "C") {
+    if (errorContainer) {
+      errorContainer.textContent = "Progressionen måste vara A, B eller C."
+    }
+    return;
+  }
+
+  //Kontrollerar efter dubbletter
+  const checkedCode = courses.some(course => course.code === code);
+
+  if (checkedCode) {
+    if (errorContainer) {
+      errorContainer.textContent = "Det finns redan en kurs med den kurskoden.";
     }
     return;
   }
@@ -63,7 +81,7 @@ function getFormData(event: SubmitEvent): void {
   addCourse(code, name, progression, syllabus);
 
   const form = document.querySelector<HTMLFormElement>("#form");
-  if (form) { form.reset()}; 
+  if (form) { form.reset() };
 
 }
 
@@ -74,11 +92,7 @@ interface CourseInfo {
   syllabus: string;
 }
 
-function addCourse(code: string, name: string, progression: string, syllabus: string): void {
-
-  if (progression !== "A" && progression !== "B" && progression !== "C") {
-    return;
-  }
+function addCourse(code: string, name: string, progression: "A" | "B" | "C", syllabus: string): void {
 
   const course: CourseInfo = {
     code: code,
@@ -87,17 +101,9 @@ function addCourse(code: string, name: string, progression: string, syllabus: st
     syllabus: syllabus
   }
 
-  const checkedCode = courses.some(checkCode);
-
-  function checkCode(courseFromArray: CourseInfo): boolean {
-    return courseFromArray.code === code;
-  }
-
-  if (checkedCode === false) {
-      courses.push(course);
-      saveCourses();
-      renderCourses();
-    }
+    courses.push(course);
+    saveCourses();
+    renderCourses();
 };
 
 function saveCourses(): void {
@@ -116,7 +122,7 @@ function renderCourses(): void {
 
       list.innerHTML += `
         <table>
-          <tbody id="course-header">
+          <tbody class="course-header">
             <tr class="course-info">
               <td>${course.code}</td>
               <td>${course.name}</td>
